@@ -1,0 +1,120 @@
+{
+  "info": {
+    "_postman_id": "085094c9-a43e-4fd9-bcff-7a3576eee0b7",
+    "name": "MINIM1V2",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54078413",
+    "_collection_link": "https://go.postman.co/collection/54078413-085094c9-a43e-4fd9-bcff-7a3576eee0b7?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "GET Products by Price",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/products/price",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "products",
+            "price"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Products by Sales",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/products/sales",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "products",
+            "sales"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Add Order",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"userId\": \"U1\",\r\n  \"items\": [\r\n    {\r\n      \"productId\": \"P1\",\r\n      \"quantity\": 2\r\n    },\r\n    {\r\n      \"productId\": \"P2\",\r\n      \"quantity\": 1\r\n    },\r\n    {\r\n      \"productId\": \"P4\",\r\n      \"quantity\": 3\r\n    }\r\n\r\n    \r\n  ]\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "orders"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "POST Deliver",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/orders/deliver",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "orders",
+            "deliver"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "GET Users orders",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/users/U1/orders",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "users",
+            "U1",
+            "orders"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

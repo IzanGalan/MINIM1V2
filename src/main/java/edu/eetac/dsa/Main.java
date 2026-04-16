@@ -32,6 +32,8 @@ public class Main {
         pm.addProduct("P1", "Cafe", 1.20);
         pm.addProduct("P2", "Bocadillo", 3.50);
         pm.addProduct("P3", "Agua", 1.00);
+        pm.addProduct("P4","Coca-Cola",2.20);
+
 
         pm.addUser("U1", "Roger");
 

@@ -6,12 +6,16 @@ import edu.eetac.dsa.models.Order;
 import edu.eetac.dsa.models.Product;
 import edu.eetac.dsa.models.dto.OrderItemRequest;
 import edu.eetac.dsa.models.dto.OrderRequest;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 @Path("/orders")
 public class OrderService {
@@ -22,11 +26,35 @@ public class OrderService {
         this.pm = ProductManagerImpl.getInstance();
     }
 
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getOrdersInfo() {
+        Map<String, Object> payload = new LinkedHashMap<>();
+        payload.put("message", "La ruta /orders esta activa. Usa POST para crear pedidos.");
+        payload.put("pendingOrders", pm.numOrders());
+        payload.put("sampleRequest", """
+                {
+                  "userId": "U1",
+                  "items": [
+                    { "productId": "P1", "quantity": 2 },
+                    { "productId": "P2", "quantity": 1 }
+                  ]
+                }
+                """);
+        return Response.ok(payload).build();
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response addOrder(OrderRequest request) {
         try {
+            if (request == null || request.getUserId() == null || request.getItems() == null || request.getItems().isEmpty()) {
+                return Response.status(Response.Status.BAD_REQUEST)
+                        .entity("Pedido inválido")
+                        .build();
+            }
+
             Order order = new Order(request.getUserId());
 
             for (OrderItemRequest itemRequest : request.getItems()) {
@@ -49,7 +77,7 @@ public class OrderService {
 
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
-                    .entity("Error al crear el pedido")
+                    .entity("Error al crear el pedido: " + e.getMessage())
                     .build();
         }
     }

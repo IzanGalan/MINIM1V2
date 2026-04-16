@@ -1,7 +1,8 @@
 package edu.eetac.dsa;
-
+import edu.eetac.dsa.*;
 import edu.eetac.dsa.services.OrderService;
 import edu.eetac.dsa.services.ProductService;
+import edu.eetac.dsa.services.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.glassfish.grizzly.http.server.HttpServer;
@@ -18,7 +19,8 @@ public class Main {
     public static HttpServer startServer() {
         final ResourceConfig rc = new ResourceConfig()
                 .register(ProductService.class)
-                .register(OrderService.class);
+                .register(OrderService.class)
+                .register(UserService.class);
 
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);
     }

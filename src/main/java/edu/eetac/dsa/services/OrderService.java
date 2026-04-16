@@ -13,6 +13,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.PathParam;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -78,6 +79,22 @@ public class OrderService {
         } catch (Exception e) {
             return Response.status(Response.Status.INTERNAL_SERVER_ERROR)
                     .entity("Error al crear el pedido: " + e.getMessage())
+                    .build();
+        }
+    }
+
+    @POST
+    @Path("/deliver")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deliverOrder() {
+        try {
+            Order delivered = pm.deliverOrder();
+
+            return Response.ok(delivered).build();
+
+        } catch (Exception e) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("No hay pedidos pendientes")
                     .build();
         }
     }
